@@ -1,26 +1,40 @@
 <!doctype html>
 <html lang="en">
   <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap/bootstrap.min.css" media="screen"> 
-    <script src="bootstrap/bootstrap.min.js"></script> 
-    <script language="javascript" type="text/javascript">
-      <!-- Everything in between will be our functions for the button presses and or whatever -->
+    <script>
+      window.jQuery || document.write('<script src="/node_modules/jquery/dist/jquery.min.js">\x3C/script>')
     </script>
 
-    <title>Source of Light</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" media="screen"> 
+    <script src="node_modules/bootstrap/bootstrap.min.js"></script> 
   </head>
   <body>
-    <h1>Relay Stuff.</h1>
+
+    <div class="container" style="text-align:center;">
+      <h1> Faux Solar Hub </h1>
+      
+      <h5>Relay Status</h5>
+
+      <!-- Buttons ================================================== -->
+      <div class="container">
+
+        <p>
+          <button id="b1" type="button" class="btn btn-primary btn-lg btn-block" onclick="setIO(2, 'ON');">ON</button>
+          <button id="b2" type="button" class="btn btn-danger  btn-lg btn-block" onclick="setIO(2, 'OFF');">OFF</button>
+        </p>
+
+      </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="jquery.min.js"</script>
-    <script src="popper.min.js"</script>
-    <script src="bootstrap.min.js"</script>
+    <script src="node_modules/jquery/dist/jquery.min.js"</script>
+    <script src="node_modules/popper.js/dist/popper.min.js"</script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"</script>
   </body>
 </html>
