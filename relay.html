@@ -5,13 +5,36 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <script>
-      window.jQuery || document.write('<script src="/node_modules/jquery/dist/jquery.min.js">\x3C/script>')
-    </script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" media="screen"> 
-    <script src="node_modules/bootstrap/bootstrap.min.js"></script> 
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> 
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+
+
+    <!-- Functions -->
+    <script>
+      function relayToggle(relay){
+        if (relay == 1){
+          document.getElementById("relay status").innerHTML = "Relay 1 On";
+        }
+        else if (relay == 2){
+          document.getElementById("relay status").innerHTML = "Relay 2 On";
+        }
+        else if (relay == 3){
+          $(function(){
+            $("#relay status").html("Relay 3 On");
+          });
+        }
+        else if (relay == 4){
+          document.getElementById("relay status").innerHTML = "Relay 4 On";
+        }
+        else {
+          console.log("Irregular...how did you manage an unexpected value.");
+        }
+
+      }
+    </script>
   </head>
   <body>
 
@@ -24,11 +47,34 @@
       <div class="container">
 
         <p>
-          <button id="b1" type="button" class="btn btn-primary btn-lg btn-block" onclick="setIO(2, 'ON');">ON</button>
-          <button id="b2" type="button" class="btn btn-danger  btn-lg btn-block" onclick="setIO(2, 'OFF');">OFF</button>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary btn-lg">
+               <input type="checkbox" name="relays" id="relay1"
+               checked autocomplete="off" onclick="relayToggle(1)"> Relay 1
+            </label>
+            <label class="btn btn-info btn-lg">
+              <input type="checkbox" name="relays" id="relay2"
+              checked autocomplete="off" onclick="relayToggle(2)"> Relay 2
+            </label>
+          </div>
         </p>
-
+        <p>
+          <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-danger btn-lg">
+               <input type="checkbox" name="relays" id="relay3"
+               checked autocomplete="off" onclick="relayToggle(3)"> Relay 3
+            </label>
+            <label class="btn btn-primary btn-lg">
+              <input type="checkbox" name="relays" id="relay4"
+              checked autocomplete="off" onclick="relayToggle(4)"> Relay 4
+            </label>
+          </div>
+        </p>
       </div>
+    </div>
+
+    <div class="container" style="text-align:center;">
+      <p id="relay status">Relay Off</p>
     </div>
 
     <!-- Optional JavaScript -->
