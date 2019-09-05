@@ -8,79 +8,74 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css" media="screen"> 
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script> 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
-
+    <script src="node_modules/popper.js/dist/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="node_modules/relay_scripts.js"></script>
 
     <!-- Functions -->
-    <script>
-      function relayToggle(relay){
-        if (relay == 1){
-          document.getElementById("relay status").innerHTML = "Relay 1 On";
-        }
-        else if (relay == 2){
-          document.getElementById("relay status").innerHTML = "Relay 2 On";
-        }
-        else if (relay == 3){
-          $(function(){
-            $("#relay status").html("Relay 3 On");
-          });
-        }
-        else if (relay == 4){
-          document.getElementById("relay status").innerHTML = "Relay 4 On";
-        }
-        else {
-          console.log("Irregular...how did you manage an unexpected value.");
-        }
+  <script>
+    // Five Buttons - five function calls
+     $(document).ready(function(){
+      $("#relay1").click(function() {
+        buttonStateChange(1);
+      })
+    });
 
-      }
-    </script>
+    $(document).ready(function(){
+      $("#relay2").click(function() {
+        buttonStateChange(2);
+      })
+    });
+
+    $(document).ready(function(){
+      $("#relay3").click(function() {
+        buttonStateChange(3);
+      })
+    });
+
+    $(document).ready(function(){
+      $("#relay4").click(function() {
+        buttonStateChange(4);
+      })
+    });
+
+    $(document).ready(function(){
+      $("#totalControl").click(function() {
+        buttonStateChange("all");
+      })
+    });
+
+  </script> 
+
   </head>
   <body>
 
-    <div class="container" style="text-align:center;">
-      <h1> Faux Solar Hub </h1>
-      
-      <h5>Relay Status</h5>
+    <div class="jumbotron jumbotron-fluid" style="text-align:center">
+      <h1 class="text-primary">Faux Solar Hub</h1>
+    </div>
 
       <!-- Buttons ================================================== -->
-      <div class="container">
-
+      <div class="container" style="text-align:center">
+        <h5>---  Relays  ---</h5>
+        <div class="btn-group-lg " role="group" aria-label="Relay Buttons">
+          <button type="button btn-lg" class="btn btn-primary btn-lg" id="relay1" data-toggle="buttons">Off</button>
+          <button type="button btn-lg" class="btn btn-secondary btn-lg" data-toggle="buttons" id="relay2">Off</button>
+        </div>
         <p>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary btn-lg">
-               <input type="checkbox" name="relays" id="relay1"
-               checked autocomplete="off" onclick="relayToggle(1)"> Relay 1
-            </label>
-            <label class="btn btn-info btn-lg">
-              <input type="checkbox" name="relays" id="relay2"
-              checked autocomplete="off" onclick="relayToggle(2)"> Relay 2
-            </label>
-          </div>
-        </p>
-        <p>
-          <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-danger btn-lg">
-               <input type="checkbox" name="relays" id="relay3"
-               checked autocomplete="off" onclick="relayToggle(3)"> Relay 3
-            </label>
-            <label class="btn btn-primary btn-lg">
-              <input type="checkbox" name="relays" id="relay4"
-              checked autocomplete="off" onclick="relayToggle(4)"> Relay 4
-            </label>
-          </div>
-        </p>
-      </div>
+        <div class="btn-group-lg" role="group" aria-label="Relay Buttons">
+          <button type="button btn-lg" class="btn btn-warning btn-lg" data-toggle="buttons" id="relay3">Off</button>
+          <button type="button btn-lg" class="btn btn-danger btn-lg" data-toggle="buttons"  id="relay4">Off</button>
+        </div>
     </div>
 
-    <div class="container" style="text-align:center;">
-      <p id="relay status">Relay Off</p>
+    <div class="container" style="text-align:center">
+      <p>
+        <p>
+        <button type="button btn-lg" class="btn btn-success btn-block" data-toggle="buttons" id="totalControl">All On</button>
+        </p>
+      </p>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="node_modules/jquery/dist/jquery.min.js"</script>
-    <script src="node_modules/popper.js/dist/popper.min.js"</script>
-    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"</script>
   </body>
 </html>
