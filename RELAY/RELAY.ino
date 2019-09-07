@@ -32,14 +32,14 @@
 #define DBG_OUTPUT_PORT Serial
 
 #ifndef STASSID
-#define STASSID "your-ssid"
-#define STAPSK  "your-password"
+#define STASSID "Sparkle Mausoleum"
+#define STAPSK  "saile123"
 #endif
 
 const char* ssid = STASSID;
 const char* password = STAPSK;
-const char* host = "esp8266fs";
-
+const char* host = "downstairs";
+//http://downstairs.local
 ESP8266WebServer server(80);
 //holds the current upload
 File fsUploadFile;
@@ -60,8 +60,6 @@ String formatBytes(size_t bytes) {
 String getContentType(String filename) {
   if (server.hasArg("download")) {
     return "application/octet-stream";
-  } else if (filename.endsWith(".htm")) {
-    return "text/html";
   } else if (filename.endsWith(".html")) {
     return "text/html";
   } else if (filename.endsWith(".css")) {
@@ -72,16 +70,8 @@ String getContentType(String filename) {
     return "image/png";
   } else if (filename.endsWith(".gif")) {
     return "image/gif";
-  } else if (filename.endsWith(".jpg")) {
-    return "image/jpeg";
-  } else if (filename.endsWith(".ico")) {
-    return "image/x-icon";
   } else if (filename.endsWith(".xml")) {
     return "text/xml";
-  } else if (filename.endsWith(".pdf")) {
-    return "application/x-pdf";
-  } else if (filename.endsWith(".zip")) {
-    return "application/x-zip";
   } else if (filename.endsWith(".gz")) {
     return "application/x-gzip";
   }
