@@ -14,10 +14,9 @@ remain down stairs and more features to be built as the project grows wings.
 
 To Do
 -------------------------------------
-
-[] - Add websockets for dynamic updating
-[] - Update the feel of the webpage
-[] - Add function to search for WiFi if saved WiFi settings don't work on
+- [ ] Add websockets for dynamic updating
+- [ ] Update the feel of the webpage
+- [ ] Add function to search for WiFi if saved WiFi settings don't work on
 bootup
-[] - Add JSON files for data storage
+- [ ] Add JSON files for data storage
 
