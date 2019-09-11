@@ -1,6 +1,25 @@
-function buttonStateChange(r){
+function turnOnRelay(relay){
+  requst = 
+  if (relay == 1){
+    buttonStateChange(relay);
+  }
+  if (relay == 2){
+    buttonStateChange(relay);
+  }
+  if (relay == 3){
+    buttonStateChange(relay);
+  }
+  if (relay == 4){
+    buttonStateChange(relay);
+  }
+  if (relay == "all"){
+    buttonStateChange(relay);
+  }
+}
 
-  if(r == 1){
+function buttonStateChange(relay){
+
+  if(relay == 1){
     if ($("#relay1").text() == "On"){
       $("#relay1").html("Off");
     }
@@ -9,7 +28,7 @@ function buttonStateChange(r){
     }
   }
 
-  else if(r == 2){
+  else if(relay == 2){
     if ($("#relay2").text() == "On"){
       $("#relay2").html("Off");
     }
@@ -18,7 +37,7 @@ function buttonStateChange(r){
     }
   }
 
-  else if(r == 3){
+  else if(relay == 3){
     if ($("#relay3").text() == "On"){
       $("#relay3").html("Off");
     }
@@ -27,7 +46,7 @@ function buttonStateChange(r){
     }
   }
 
-  else if(r == 4){
+  else if(relay == 4){
     if ($("#relay4").text() == "On"){
       $("#relay4").html("Off");
     }
@@ -36,7 +55,7 @@ function buttonStateChange(r){
     }
   }
 
-  else if(r == "all"){
+  else if(relay == "all"){
     if ($("#totalControl").text() == "All On"){
       $("#totalControl").html("All Off");
     }
@@ -45,4 +64,5 @@ function buttonStateChange(r){
     }
   }
 }
+
 

@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
 
@@ -8,6 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap/bootstrap.min.css" media="screen"> 
+      
     <script src="jquery/jquery.min.js"></script>
     <script src="bootstrap/bootstrap.min.js"></script>
     <script src="relay_scripts.js"></script>
@@ -17,31 +18,31 @@
     // Five Buttons - five function calls
      $(document).ready(function(){
       $("#relay1").click(function() {
-        buttonStateChange(1);
+        turnOnRelay(1);
       })
     });
 
     $(document).ready(function(){
       $("#relay2").click(function() {
-        buttonStateChange(2);
+        turnOnRelay(2);
       })
     });
 
     $(document).ready(function(){
       $("#relay3").click(function() {
-        buttonStateChange(3);
+        turnOnRelay(3);
       })
     });
 
     $(document).ready(function(){
       $("#relay4").click(function() {
-        buttonStateChange(4);
+        turnOnRelay(4);
       })
     });
 
     $(document).ready(function(){
       $("#totalControl").click(function() {
-        buttonStateChange("all");
+        turnOnRelay("all");
       })
     });
 
