@@ -171,6 +171,10 @@ void setup(){
     request->send(SPIFFS, "relay_scripts.js", "text/js");
   });
 
+  server.on("/RELAY_1_ON", HTTP_GET, [](AsyncWebServerRequest *request){
+    quadRelay.turnRelayOn(1);       
+  });
+
   server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.htm");
 
   server.onNotFound([](AsyncWebServerRequest *request){
