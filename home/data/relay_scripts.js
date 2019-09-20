@@ -6,8 +6,9 @@ function turnOnRelay(relay){
   }
 
   console.log("Maybe we'll turn on a relay.");
-  relay_request =  new XMLHttpRequest();   // Starts request
-  request_data = "RELAY_" + relay + "_ON"; // Formats the request - remember it's all text
+  request =  new XMLHttpRequest();   // Starts request
+  home_page = "/relay.html"
+  request_data = home_page + "/RELAY_" + relay + "_ON"; // Formats the request - remember it's all text
   console.log(request_data);
   // request.open(method, url, async);
   request.open("GET", request_data, true); // "GET" command ran in background

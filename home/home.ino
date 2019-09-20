@@ -166,12 +166,14 @@ void setup(){
     request->send(SPIFFS, "/bootstrap/bootstrap.min.js", "text/js");
   });
   // Bootstrap End -----------------
+
   // Relay visuals -----------------
   server.on("relay_scripts.js", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(SPIFFS, "relay_scripts.js", "text/js");
   });
 
-  server.on("/RELAY_1_ON", HTTP_GET, [](AsyncWebServerRequest *request){
+  // When a button is pressed
+  server.on("relay.html/RELAY_1_ON", HTTP_GET, [](AsyncWebServerRequest *request){
     quadRelay.turnRelayOn(1);       
   });
 
