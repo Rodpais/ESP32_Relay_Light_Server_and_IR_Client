@@ -100,8 +100,7 @@ const char * hostName = "downstairs";
 const char* http_username = "admin";
 const char* http_password = "admin";
 
-//http://downstairs.local/
-//http://downstairs.local/edit
+//http://downstairs.local/index
 //http://downstairs.local/relay.html
 void setup(){
 
@@ -111,6 +110,7 @@ void setup(){
   WiFi.mode(WIFI_AP_STA);
   WiFi.softAP(hostName);
   WiFi.begin(ssid, password);
+
   if (WiFi.waitForConnectResult() != WL_CONNECTED) {
     Serial.printf("STA: Failed!\n");
     WiFi.disconnect(false);
@@ -124,11 +124,13 @@ void setup(){
   //Send OTA events to the browser
   ArduinoOTA.onStart([]() { events.send("Update Start", "ota"); });
   ArduinoOTA.onEnd([]() { events.send("Update End", "ota"); });
+
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
     char p[32];
     sprintf(p, "Progress: %u%%\n", (progress/(total/100)));
     events.send(p, "ota");
   });
+
   ArduinoOTA.onError([](ota_error_t error) {
     if(error == OTA_AUTH_ERROR) events.send("Auth Failed", "ota");
     else if(error == OTA_BEGIN_ERROR) events.send("Begin Failed", "ota");
@@ -136,6 +138,7 @@ void setup(){
     else if(error == OTA_RECEIVE_ERROR) events.send("Recieve Failed", "ota");
     else if(error == OTA_END_ERROR) events.send("End Failed", "ota");
   });
+
   ArduinoOTA.setHostname(hostName);
   ArduinoOTA.begin();
 
@@ -173,11 +176,19 @@ void setup(){
   });
 
   // When a button is pressed
-  server.on("relay.html/RELAY_1_ON", HTTP_GET, [](AsyncWebServerRequest *request){
-    quadRelay.turnRelayOn(1);       
+  // -------Relay One---------
+  server.on("/relay.html/RELAY_1_ON", HTTP_GET, [](AsyncWebServerRequest *request){
+    quadRelay.toggleRelay(1);       
+    request->send(200);  
   });
 
-  server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.htm");
+  // -------Relay Two---------
+  server.on("/relay.html/RELAY_2_ON", HTTP_GET, [](AsyncWebServerRequest *request){
+    quadRelay.toggleRelay(2);       
+    request->send(200);  
+  });
+
+  server.serveStatic("/", SPIFFS, "/").setDefaultFile("relay.html");
 
   server.onNotFound([](AsyncWebServerRequest *request){
     Serial.printf("NOT_FOUND: ");
@@ -246,6 +257,8 @@ void setup(){
   if (quadRelay.begin()){
     Serial.println("Ready to flip some switches.");
   }
+  else
+    Serial.println("Could not communicate with Quad Relay.");
 
 }
 
