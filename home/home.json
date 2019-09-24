@@ -1,0 +1,4 @@
+var relay = { "one"   : "On",
+              "two"   : "On",
+              "three" : "On",
+              "four"  : "On" };
