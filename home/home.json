@@ -1,6 +1,12 @@
-var relay = { "one"   : "On",
-              "two"   : "On",
-              "three" : "On",
-              "four"  : "On" };
-
-var wifiCredentials = { "SSID" : "Sparkle Mausoleum"};
+{
+  "wifi_credentials" : { 
+    "SSID" : "Sparkle Mausoleum",
+    "Password": ""
+  },
+  "relay_states" : { 
+    "relay_one" : 1,
+    "relay_two" : 1,
+    "relay_three": 1,
+    "relay_four": 1
+  }
+}

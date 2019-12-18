@@ -1,5 +1,6 @@
 #include <Wire.h>
 #include "SparkFun_Qwiic_Relay.h"
+#include "ArduinoJson.h"
 
 #include <ArduinoOTA.h>
 #include <FS.h>
@@ -16,10 +17,24 @@
 
 Qwiic_Relay quadRelay(RELAY_ADDR);
 
-// SKETCH BEGIN
+
 AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 AsyncEventSource events("/events");
+
+// A local way to save the state of our relays without relying on the 
+// serialization process of the Arduino Json library.
+struct relay_states {
+  uint8_t relay_one, 
+  uint8_t relay_two,
+  uint8_t relay_three,
+  uint8_t relay_four
+};
+
+struct wifi_creds {
+  char host[64], 
+  char password[64]
+}
 
 void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventType type, void * arg, uint8_t *data, size_t len){
   if(type == WS_EVT_CONNECT){
@@ -93,9 +108,11 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
   }
 }
 
+// This loads the global structs that hold such information
+load_wifi_settings();
 
-const char* ssid = "Sparkle Mausoleum";
-const char* password = "saile123";
+const char* ssid = wifi_creds.host;
+const char* password = wife_creds.password;
 const char * hostName = "downstairs";
 const char* http_username = "admin";
 const char* http_password = "admin";
