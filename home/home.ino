@@ -22,19 +22,24 @@ AsyncWebServer server(80);
 AsyncWebSocket ws("/ws");
 AsyncEventSource events("/events");
 
+String config_path = "/home.json";
+
 // A local way to save the state of our relays without relying on the 
 // serialization process of the Arduino Json library.
-struct relay_states {
+struct Relay_states {
   uint8_t relay_one, 
   uint8_t relay_two,
   uint8_t relay_three,
   uint8_t relay_four
 };
 
-struct wifi_creds {
+struct Wifi_creds {
   char host[64], 
   char password[64]
-}
+};
+
+Relay_states relay_states;
+Wifi_creds wifi_creds;
 
 void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventType type, void * arg, uint8_t *data, size_t len){
   if(type == WS_EVT_CONNECT){
@@ -110,6 +115,9 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
 
 // This loads the global structs that hold such information
 load_wifi_settings();
+
+Serial.println(wifi_creds.host);
+Serial.println(wifi_creds.password);
 
 const char* ssid = wifi_creds.host;
 const char* password = wife_creds.password;
