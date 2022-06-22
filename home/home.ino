@@ -43,13 +43,13 @@ Wifi_creds wifi_creds;
 
 void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventType type, void * arg, uint8_t *data, size_t len){
   if(type == WS_EVT_CONNECT){
-    Serial.printf("ws[%s][%u] connect\n", server->url(), client->id());
+    Serial.printf("ws[%s][%u] conectado\n", server->url(), client->id());
     client->printf("Hello Client %u :)", client->id());
     client->ping();
   } else if(type == WS_EVT_DISCONNECT){
-    Serial.printf("ws[%s][%u] disconnect: %u\n", server->url(), client->id());
+    Serial.printf("ws[%s][%u] disconectado: %u\n", server->url(), client->id());
   } else if(type == WS_EVT_ERROR){
-    Serial.printf("ws[%s][%u] error(%u): %s\n", server->url(), client->id(), *((uint16_t*)arg), (char*)data);
+    Serial.printf("ws[%s][%u] erro(%u): %s\n", server->url(), client->id(), *((uint16_t*)arg), (char*)data);
   } else if(type == WS_EVT_PONG){
     Serial.printf("ws[%s][%u] pong[%u]: %s\n", server->url(), client->id(), len, (len)?(char*)data:"");
   } else if(type == WS_EVT_DATA){
@@ -73,9 +73,9 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
       Serial.printf("%s\n",msg.c_str());
 
       if(info->opcode == WS_TEXT)
-        client->text("I got your text message");
+        client->text("Recebi sua mensagem de texto");
       else
-        client->binary("I got your binary message");
+        client->binary("Recebi sua mensagem binária");
     } else {
       //message is comprised of multiple frames or the frame is split into multiple packets
       if(info->index == 0){
@@ -104,9 +104,9 @@ void onWsEvent(AsyncWebSocket * server, AsyncWebSocketClient * client, AwsEventT
         if(info->final){
           Serial.printf("ws[%s][%u] %s-message end\n", server->url(), client->id(), (info->message_opcode == WS_TEXT)?"text":"binary");
           if(info->message_opcode == WS_TEXT)
-            client->text("I got your text message");
+            client->text("Recebi sua mensagem de texto");
           else
-            client->binary("I got your binary message");
+            client->binary("Recebi sua mensagem binária");
         }
       }
     }
@@ -147,21 +147,21 @@ void setup(){
   Serial.println(WiFi.localIP());
 
   //Send OTA events to the browser
-  ArduinoOTA.onStart([]() { events.send("Update Start", "ota"); });
-  ArduinoOTA.onEnd([]() { events.send("Update End", "ota"); });
+  ArduinoOTA.onStart([]() { events.send("Update Iniciado", "ota"); });
+  ArduinoOTA.onEnd([]() { events.send("Update Finalizado", "ota"); });
 
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
     char p[32];
-    sprintf(p, "Progress: %u%%\n", (progress/(total/100)));
+    sprintf(p, "Progresso: %u%%\n", (progress/(total/100)));
     events.send(p, "ota");
   });
 
   ArduinoOTA.onError([](ota_error_t error) {
-    if(error == OTA_AUTH_ERROR) events.send("Auth Failed", "ota");
-    else if(error == OTA_BEGIN_ERROR) events.send("Begin Failed", "ota");
-    else if(error == OTA_CONNECT_ERROR) events.send("Connect Failed", "ota");
-    else if(error == OTA_RECEIVE_ERROR) events.send("Recieve Failed", "ota");
-    else if(error == OTA_END_ERROR) events.send("End Failed", "ota");
+    if(error == OTA_AUTH_ERROR) events.send("Auth Falhou", "ota");
+    else if(error == OTA_BEGIN_ERROR) events.send("Início Falhou", "ota");
+    else if(error == OTA_CONNECT_ERROR) events.send("Conexão Falhou", "ota");
+    else if(error == OTA_RECEIVE_ERROR) events.send("Recibimento Falhou", "ota");
+    else if(error == OTA_END_ERROR) events.send("Final Falhou", "ota");
   });
 
   ArduinoOTA.setHostname(hostName);
@@ -280,10 +280,10 @@ void setup(){
   // Quad Relay  
   Wire.begin();
   if (quadRelay.begin()){
-    Serial.println("Ready to flip some switches.");
+    Serial.println("Pronto para virar alguns interruptores.");
   }
   else
-    Serial.println("Could not communicate with Quad Relay.");
+    Serial.println("Não foi possível comunicar com o Relay.");
 
 }
 

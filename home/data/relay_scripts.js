@@ -1,11 +1,11 @@
 function turnOnRelay(relay){
   
   if (relay < 1 || relay > 5){ 
-    console.log("Incorrect Paramter");
+    console.log("Parametro Incorreto.");
     return;
   }
 
-  console.log("Maybe we'll turn on a relay.");
+  console.log("Talvez liguemos um relay.");
   request =  new XMLHttpRequest();   // Starts request
   home_page = "/relay.html"
   request_data = home_page + "/RELAY_" + relay + "_ON"; // Formats the request - remember it's all text
@@ -21,7 +21,7 @@ function turnOnRelay(relay){
 function buttonStateChange(relay){
 
   if (relay < 1 || relay > 5){ 
-    console.log("Incorrect Paramter");
+    console.log("Parametro Incorreto.");
     return; 
   } 
  
@@ -37,11 +37,11 @@ function buttonStateChange(relay){
   }
 
   else {
-    if ($("#totalControl").text() == "All On"){
-      $("#totalControl").html("All Off");
+    if ($("#totalControl").text() == "Tudo On"){
+      $("#totalControl").html("Tudo Off");
     }
-    else if ($("#totalControl").text() == "All Off"){
-      $("#totalControl").html("All On");
+    else if ($("#totalControl").text() == "Tudo Off"){
+      $("#totalControl").html("Tudo On");
     }
   }
 }

@@ -69,14 +69,14 @@
       ws = new WebSocket('ws://'+document.location.host+'/ws',['arduino']);
       ws.binaryType = "arraybuffer";
       ws.onopen = function(e){
-        addMessage("Connected");
+        addMessage("Connectado");
       };
       ws.onclose = function(e){
-        addMessage("Disconnected");
+        addMessage("Desconectado");
       };
       ws.onerror = function(e){
-        console.log("ws error", e);
-        addMessage("Error");
+        console.log("ws erro", e);
+        addMessage("Erro");
       };
       ws.onmessage = function(e){
         var msg = "";
@@ -102,18 +102,18 @@
     function startEvents(){
       var es = new EventSource('/events');
       es.onopen = function(e) {
-        addMessage("Events Opened");
+        addMessage("Eventos Abertos");
       };
       es.onerror = function(e) {
         if (e.target.readyState != EventSource.OPEN) {
-          addMessage("Events Closed");
+          addMessage("Eventos Fechados");
         }
       };
       es.onmessage = function(e) {
-        addMessage("Event: " + e.data);
+        addMessage("Evento: " + e.data);
       };
       es.addEventListener('ota', function(e) {
-        addMessage("Event[ota]: " + e.data);
+        addMessage("Evento[ota]: " + e.data);
       }, false);
     }
     function onBodyLoad(){
